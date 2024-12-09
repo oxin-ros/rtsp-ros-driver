@@ -1,8 +1,7 @@
-#! /usr/bin/env python2
+#! /usr/bin/env python
 
 import os
 import cv2
-import sys
 import time
 import rospy
 from cv_bridge import CvBridge
@@ -37,7 +36,7 @@ def camera_info_publisher_fcn(_):
 
 if __name__ == '__main__':
     # initialize ROS node
-    print("Initializing ROS node... ", end=' ')
+    print("Initializing ROS node... ")
     rospy.init_node('rtsp_camera_driver_node')
     print("Done!")
 
@@ -47,11 +46,6 @@ if __name__ == '__main__':
     camera_frame = rospy.get_param('~camera_frame')
     image_raw_topic = rospy.get_param('~image_raw_topic')
     camera_info_topic = rospy.get_param('~camera_info_topic')
-
-    # check the environment variable ROS_HOME
-    if( 'ROS_HOME' not in os.environ ):
-        rospy.logerr("The environment variable ROS_HOME is not set. Please set it before you run this node. It should be pointing to your `catkin_ws` directory.")
-        exit(0)
 
     # open RTSP stream
     cap = cv2.VideoCapture(resource)
